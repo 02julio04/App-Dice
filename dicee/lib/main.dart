@@ -3,14 +3,24 @@ import 'dart:math';
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   int leftDice = 1;
+  int rightDice = 1;
+
+  //Metodo para generar los dados aleatorios
+  void LanzarDados()
+  {
+    leftDice = Random().nextInt(6) + 1;
+    rightDice = Random().nextInt(6) + 1;
+
+    setState(() {
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,24 +35,25 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: Row(
-            children: [
+            children: <Widget>[
               Expanded(
-                child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        leftDice = Random().nextInt(6) + 1;
-                      });
-
-                    },
-                    child: Image.asset('images/dice$leftDice.png')),
-              ),
-              Expanded(
-                child: Image.asset('images/dice1.png'),
-              ),
-            ],
-          ),
+              child: TextButton(child: Image.asset('images/dice$leftDice.png'),
+              onPressed: (){
+                LanzarDados();
+              },
+            ),
+           ),
+            Expanded(child: TextButton(
+            child: Image.asset('images/dice$rightDice.png'),
+              onPressed: (){
+    LanzarDados();
+    },
+    ),
+    ),
+          ],
         ),
-      ),
+       ),
+    ),
     );
-  }
+    }
 }
